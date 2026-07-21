@@ -112,11 +112,11 @@ El juego busca generar tensión sostenida y vulnerabilidad: el jugador nunca se 
 
 
 
-!\[HUD del juego](imagenes/hud.jpg)
+![HUD del juego](imagenes/hud.jpg)
 
 
 
-!\[Minijuego de hackeo](imagenes/minijuegohackeo.jpeg)
+![Minijuego de hackeo](imagenes/minijuegohackeo.jpeg)
 
 
 
