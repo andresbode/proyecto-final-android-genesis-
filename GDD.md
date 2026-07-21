@@ -24,7 +24,7 @@
 
 ## 1\. High Concept y Visión Inicial
 
-!\[Pasillo](imagenes/o.png)
+![Pasillo](imagenes/o.png)
 
 **High Concept:** Un ingeniero despierta solo en un complejo tecnológico en ruinas y debe encontrar la salida mientras los drones que antes mantenían el lugar en funcionamiento ahora lo cazan, y la verdad sobre lo que pasó ahí dentro se revela de a poco.
 
