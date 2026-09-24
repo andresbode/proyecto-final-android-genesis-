@@ -29,18 +29,25 @@ public class MovimentoJugador : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Configuración inicial limpia del CharacterController
+        // Mantenemos tu configuración por defecto
         controller.height = standingHeight;
-        controller.center = new Vector3(0, standingHeight / 2f, 0);
+        controller.center = Vector3.zero;
+
+        // Posición inicial de la cámara a la altura de los ojos (dentro de la cápsula)
+        if (cameraTransform != null)
+        {
+            cameraTransform.localPosition = new Vector3(0, 0.6f, 0);
+        }
     }
 
     void Update()
     {
-        // 1. Detección de suelo real con Raycast (A prueba de fallos)
-        // Lanza un rayo muy corto desde la base de la cápsula hacia abajo
-        isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.25f);
+        // 1. Raycast desde la base real (Suelo en Y = -height/2)
+        float medioAlto = controller.height / 2f;
+        Vector3 baseDeLosPies = transform.position + controller.center - new Vector3(0, medioAlto - 0.1f, 0);
+        isGrounded = Physics.Raycast(baseDeLosPies, Vector3.down, 0.25f);
 
-        // 2. Control de la Cámara (Mouse)
+        // 2. Rotación de Cámara y Cuerpo
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
@@ -48,9 +55,12 @@ public class MovimentoJugador : MonoBehaviour
 
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-        cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        if (cameraTransform != null)
+        {
+            cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        }
 
-        // 3. Lógica de Agacharse
+        // 3. Agacharse
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;
@@ -58,14 +68,14 @@ public class MovimentoJugador : MonoBehaviour
             if (isCrouching)
             {
                 controller.height = crouchingHeight;
-                controller.center = new Vector3(0, crouchingHeight / 2f, 0);
-                cameraTransform.localPosition = new Vector3(0, crouchingHeight * 0.8f, 0);
+                controller.center = Vector3.zero;
+                if (cameraTransform != null) cameraTransform.localPosition = new Vector3(0, 0.2f, 0);
             }
             else
             {
                 controller.height = standingHeight;
-                controller.center = new Vector3(0, standingHeight / 2f, 0);
-                cameraTransform.localPosition = new Vector3(0, standingHeight * 0.8f, 0);
+                controller.center = Vector3.zero;
+                if (cameraTransform != null) cameraTransform.localPosition = new Vector3(0, 0.6f, 0);
             }
         }
 
