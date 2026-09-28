@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class DronPatrulla : MonoBehaviour
 {
     public Transform[] puntosPatrulla;
-
+    public bool patrullando = true;
     private NavMeshAgent agent;
     private int indiceActual = 0;
 
@@ -17,8 +17,16 @@ public class DronPatrulla : MonoBehaviour
         IrAlSiguientePunto();
     }
 
+    public Vector3 direccionMovimiento;
+
     void Update()
     {
+
+        if (!patrullando)
+        {
+            return;
+        }
+
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             indiceActual++;
@@ -30,6 +38,8 @@ public class DronPatrulla : MonoBehaviour
 
             IrAlSiguientePunto();
         }
+
+        direccionMovimiento = agent.velocity.normalized;
 
         if (agent.velocity.magnitude > 0.1f)
         {
