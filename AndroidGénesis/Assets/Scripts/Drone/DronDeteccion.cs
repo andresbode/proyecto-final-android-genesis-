@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DronDeteccion : MonoBehaviour
 {
-    public float distanciaVision = 15f;
+    public float distanciaVision = 20f;
     public Transform puntoVision;
     public DronPatrulla patrulla;
     private DronPersecucion persecucion;
