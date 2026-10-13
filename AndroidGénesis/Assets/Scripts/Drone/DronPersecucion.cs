@@ -15,6 +15,7 @@ public class DronPersecucion : MonoBehaviour
 
     void Update()
     {
+        if (jugador == null) return;
         if (persiguiendo)
         {
             float distancia = Vector3.Distance(transform.position, jugador.position);
