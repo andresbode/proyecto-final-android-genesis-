@@ -4,16 +4,18 @@ using TMPro;
 public class TecladoPuerta : MonoBehaviour
 {
     public GameObject textoInteraccion;
-    public TMP_Text txtCodigo;              
+    public TMP_Text txtCodigo;
+    public GameObject panelTeclado;
+    public JugadorMovimiento movimientoJugador;
+    public PuertaCorrediza puerta;
+    public string codigoCorrecto = "2607";
     public int largoMaximo = 4;
-    public GameObject panelTeclado;                  
-    public JugadorMovimiento JugadorMovimiento;       
-    private bool panelAbierto = false;               
 
     private bool jugadorCerca = false;
-    private string codigoIngresado = "";    
+    private bool panelAbierto = false;
+    private string codigoIngresado = "";
 
-    void Start()                            
+    void Start()
     {
         ActualizarPantalla();
     }
@@ -42,22 +44,47 @@ public class TecladoPuerta : MonoBehaviour
         {
             panelAbierto = !panelAbierto;
             panelTeclado.SetActive(panelAbierto);
-            JugadorMovimiento.enabled = !panelAbierto;
+            movimientoJugador.enabled = !panelAbierto;
 
             Cursor.visible = panelAbierto;
             Cursor.lockState = panelAbierto ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 
-    public void AgregarNumero(string numero)    
+    public void AgregarNumero(string numero)
     {
         if (codigoIngresado.Length >= largoMaximo) return;
 
         codigoIngresado += numero;
         ActualizarPantalla();
+
+        if (codigoIngresado.Length == largoMaximo)
+        {
+            if (codigoIngresado == codigoCorrecto)
+            {
+                puerta.Abrir();
+                CerrarPanel();
+            }
+            else
+            {
+                codigoIngresado = "";
+                ActualizarPantalla();
+            }
+        }
     }
 
-    void ActualizarPantalla()                  
+    void CerrarPanel()
+    {
+        panelAbierto = false;
+        panelTeclado.SetActive(false);
+        movimientoJugador.enabled = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        codigoIngresado = "";
+        ActualizarPantalla();
+    }
+
+    void ActualizarPantalla()
     {
         txtCodigo.text = codigoIngresado == "" ? "----" : codigoIngresado;
     }
