@@ -493,6 +493,8 @@ MonoBehaviour:
   desplazamiento: {x: 3, y: 0, z: 0}
   velocidad: 2
   abierta: 0
+  abrirConE: 0
+  textoInteraccion: {fileID: 0}
 --- !u!65 &73962554
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4339,7 +4341,8 @@ GameObject:
   - component: {fileID: 689118811}
   - component: {fileID: 689118810}
   - component: {fileID: 689118809}
-  - component: {fileID: 689118808}
+  - component: {fileID: 689118812}
+  - component: {fileID: 689118813}
   m_Layer: 0
   m_Name: puertaOficina (1)
   m_TagString: Untagged
@@ -4362,21 +4365,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 494659705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &689118808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689118806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b8b6dcdc332e3d4586f021ff9b3f07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desplazamiento: {x: 0, y: 0, z: 2}
-  velocidad: 2
-  abierta: 0
 --- !u!65 &689118809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4451,6 +4439,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689118806}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &689118812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689118806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8b6dcdc332e3d4586f021ff9b3f07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desplazamiento: {x: 0, y: 0, z: 2}
+  velocidad: 2
+  abierta: 0
+  abrirConE: 1
+  textoInteraccion: {fileID: 256854624}
+--- !u!65 &689118813
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689118806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &695758913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,6 +5151,8 @@ MonoBehaviour:
   desplazamiento: {x: 0, y: 0, z: 2}
   velocidad: 2
   abierta: 0
+  abrirConE: 0
+  textoInteraccion: {fileID: 0}
 --- !u!65 &844719006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6420,6 +6448,8 @@ MonoBehaviour:
   desplazamiento: {x: -3, y: 0, z: 0}
   velocidad: 2
   abierta: 0
+  abrirConE: 0
+  textoInteraccion: {fileID: 0}
 --- !u!65 &1072696255
 BoxCollider:
   m_ObjectHideFlags: 0

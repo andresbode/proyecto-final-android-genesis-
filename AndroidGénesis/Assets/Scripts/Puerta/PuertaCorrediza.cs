@@ -5,6 +5,9 @@ public class PuertaCorrediza : MonoBehaviour
     public Vector3 desplazamiento = new Vector3(0, 0, 2f);
     public float velocidad = 2f;
     public bool abierta = false;
+    public bool abrirConE = false;
+    public GameObject textoInteraccion;
+    private bool jugadorCerca = false;
 
     private Vector3 posicionCerrada;
     private Vector3 posicionAbierta;
@@ -15,8 +18,35 @@ public class PuertaCorrediza : MonoBehaviour
         posicionAbierta = posicionCerrada + desplazamiento;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (!abrirConE) return;                
+
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = true;
+            textoInteraccion.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (!abrirConE) return;
+
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = false;
+            textoInteraccion.SetActive(false);
+        }
+    }
+
     void Update()
     {
+        if (abrirConE && jugadorCerca && Input.GetKeyDown(KeyCode.E))   
+        {
+            abierta = !abierta;
+        }
+
         Vector3 destino = abierta ? posicionAbierta : posicionCerrada;
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, destino, velocidad * Time.deltaTime);
     }
