@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;                                      
 
 public class JugadorDisparo : MonoBehaviour
 {
@@ -6,20 +7,39 @@ public class JugadorDisparo : MonoBehaviour
     public float distanciaDisparo = 100f;
     public float danio = 25f;
 
+    public int tamanoTambor = 6;                   
+    public int balasEnTambor = 6;                  
+    public int balasReserva = 12;                 
+    public TMP_Text txtBalas;                      
+
+    void Start()                                 
+    {
+        ActualizarTexto();
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))          
+        {
+            Recargar();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
+            if (balasEnTambor <= 0)                
+            {
+                Debug.Log("Sin balas, recargá con R");
+                return;
+            }
+
+            balasEnTambor--;                       
+            ActualizarTexto();                     
+
             RaycastHit hit;
-
-            Debug.DrawRay(camara.transform.position, camara.transform.forward * distanciaDisparo, Color.green, 1f); 
-
 
             if (Physics.Raycast(camara.transform.position, camara.transform.forward, out hit, distanciaDisparo))
             {
-                Debug.Log("Disparo pegó en: " + hit.collider.name); 
-
-                DronVida vidaDron = hit.collider.GetComponent<DronVida>();
+                DronVida vidaDron = hit.collider.GetComponentInParent<DronVida>();
 
                 if (vidaDron != null)
                 {
@@ -27,5 +47,27 @@ public class JugadorDisparo : MonoBehaviour
                 }
             }
         }
+    }
+
+    void Recargar()                                
+    {
+        int faltan = tamanoTambor - balasEnTambor;
+        int aCargar = Mathf.Min(faltan, balasReserva);
+
+        balasEnTambor += aCargar;
+        balasReserva -= aCargar;
+        ActualizarTexto();
+    }
+
+    public void AgregarMunicion(int cantidad)      
+    {
+        balasReserva += cantidad;
+        ActualizarTexto();
+    }
+
+    void ActualizarTexto()                        
+    {
+        if (txtBalas != null)
+            txtBalas.text = "Balas: " + balasEnTambor + " / " + balasReserva;
     }
 }
